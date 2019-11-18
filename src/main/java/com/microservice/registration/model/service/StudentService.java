@@ -8,6 +8,5 @@ public interface StudentService {
   Flux<Student> findAll();
   Mono<Student> findById(String id);
   Mono<Student> create(Student student);
-  Mono<Student> update(Student student, String id);
-  Mono<Void> delete(String id);
+  Mono<Void> delete(Student student);
 }

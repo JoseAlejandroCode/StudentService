@@ -16,26 +16,21 @@ public class StudentServiceImpl implements StudentService {
 
   @Override
   public Flux<Student> findAll() {
-    return null;
+    return studentDAO.findAll();
   }
 
   @Override
   public Mono<Student> findById(String id) {
-    return null;
+    return studentDAO.findById(id);
   }
 
   @Override
   public Mono<Student> create(Student student) {
-    return null;
+    return studentDAO.save(student);
   }
 
   @Override
-  public Mono<Student> update(Student student, String id) {
-    return null;
-  }
-
-  @Override
-  public Mono<Void> delete(String id) {
-    return null;
+  public Mono<Void> delete(Student student) {
+    return studentDAO.delete(student);
   }
 }
