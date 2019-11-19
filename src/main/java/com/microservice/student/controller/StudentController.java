@@ -1,7 +1,7 @@
-package com.microservice.registration.controller;
+package com.microservice.student.controller;
 
-import com.microservice.registration.model.document.Student;
-import com.microservice.registration.model.service.StudentService;
+import com.microservice.student.model.document.Student;
+import com.microservice.student.model.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

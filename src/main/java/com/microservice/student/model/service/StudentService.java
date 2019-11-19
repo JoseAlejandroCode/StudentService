@@ -1,6 +1,6 @@
-package com.microservice.registration.model.service;
+package com.microservice.student.model.service;
 
-import com.microservice.registration.model.document.Student;
+import com.microservice.student.model.document.Student;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

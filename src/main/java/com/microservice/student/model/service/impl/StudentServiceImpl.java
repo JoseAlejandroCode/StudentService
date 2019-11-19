@@ -1,8 +1,8 @@
-package com.microservice.registration.model.service.impl;
+package com.microservice.student.model.service.impl;
 
-import com.microservice.registration.model.dao.StudentDAO;
-import com.microservice.registration.model.document.Student;
-import com.microservice.registration.model.service.StudentService;
+import com.microservice.student.model.dao.StudentDAO;
+import com.microservice.student.model.document.Student;
+import com.microservice.student.model.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

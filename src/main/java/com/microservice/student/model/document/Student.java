@@ -1,4 +1,4 @@
-package com.microservice.registration.model.document;
+package com.microservice.student.model.document;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
