@@ -16,14 +16,11 @@ public class Student {
   private String numberDocument;
   private Boolean gender;
   private Date birthdate;
-  private List<Family> family;
 
   public Student() {
-    family = new ArrayList<>();
   }
 
   public Student(String fullName, String typeDocument, String numberDocument, Boolean gender, Date birthdate) {
-    this();
     this.fullName = fullName;
     this.typeDocument = typeDocument;
     this.numberDocument = numberDocument;
@@ -79,11 +76,4 @@ public class Student {
     this.birthdate = birthdate;
   }
 
-  public List<Family> getFamily() {
-    return family;
-  }
-
-  public void addFamily(Family family) {
-    this.family.add(family);
-  }
 }

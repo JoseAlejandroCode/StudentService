@@ -1,8 +1,9 @@
-package com.microservice.student.model.service.impl;
+package com.microservice.student.service.impl;
 
-import com.microservice.student.model.dao.StudentDAO;
+import com.microservice.student.component.StudentConverter;
+import com.microservice.student.repository.StudentRepository;
 import com.microservice.student.model.document.Student;
-import com.microservice.student.model.service.StudentService;
+import com.microservice.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -12,21 +13,24 @@ import reactor.core.publisher.Mono;
 public class StudentServiceImpl implements StudentService {
 
   @Autowired
-  private StudentDAO studentDAO;
+  private StudentRepository studentRepository;
+
+  @Autowired
+  private StudentConverter studentConverter;
 
   @Override
   public Flux<Student> findAll() {
-    return studentDAO.findAll();
+    return studentRepository.findAll();
   }
 
   @Override
   public Mono<Student> findById(String id) {
-    return studentDAO.findById(id);
+    return studentRepository.findById(id);
   }
 
   @Override
   public Mono<Student> create(Student student) {
-    return studentDAO.save(student);
+    return studentRepository.save(student);
   }
 
   @Override
@@ -37,12 +41,12 @@ public class StudentServiceImpl implements StudentService {
       s.setGender(student.getGender());
       s.setTypeDocument(student.getTypeDocument());
       s.setNumberDocument(student.getNumberDocument());
-      return studentDAO.save(s);
+      return studentRepository.save(s);
     });
   }
 
   @Override
   public Mono<Void> delete(String  id) {
-    return findById(id).flatMap(s -> studentDAO.delete(s));
+    return findById(id).flatMap(s -> studentRepository.delete(s));
   }
 }

@@ -1,4 +1,4 @@
-package com.microservice.student.model.service;
+package com.microservice.student.service;
 
 import com.microservice.student.model.document.Student;
 import reactor.core.publisher.Flux;
