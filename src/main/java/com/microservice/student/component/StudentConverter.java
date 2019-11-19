@@ -1,19 +1,18 @@
 package com.microservice.student.component;
 
 import com.microservice.student.model.document.Student;
-import com.microservice.student.model.dto.StudentDTO;
-import com.sun.corba.se.impl.javax.rmi.CORBA.StubDelegateImpl;
+import com.microservice.student.model.dto.StudentDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class StudentConverter {
-  public StudentDTO converToDto(Student student){
-    StudentDTO studentDTO = new StudentDTO();
+  public StudentDto converToDto(Student student){
+    StudentDto studentDTO = new StudentDto();
 
     return studentDTO;
   }
 
-  public Student convertToDocument(StudentDTO studentDTO){
+  public Student convertToDocument(StudentDto studentDTO){
     Student student = new Student();
 
     return student;

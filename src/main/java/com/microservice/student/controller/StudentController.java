@@ -1,7 +1,7 @@
 package com.microservice.student.controller;
 
 import com.microservice.student.component.StudentConverter;
-import com.microservice.student.model.dto.StudentDTO;
+import com.microservice.student.model.dto.StudentDto;
 import com.microservice.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class StudentController {
   private StudentConverter studentConverter;
 
   @GetMapping
-  public Mono<ResponseEntity<Flux<StudentDTO>>> listar(){
+  public Mono<ResponseEntity<Flux<StudentDto>>> listar(){
     return Mono.just(ResponseEntity
             .ok().contentType(MediaType.APPLICATION_JSON).body(studentService.findAll().flatMap(
                     student -> Mono.just(studentConverter.converToDto(student))
@@ -31,7 +31,7 @@ public class StudentController {
   }
 
   @GetMapping("/{id}")
-  public Mono<ResponseEntity<StudentDTO>> ver(@PathVariable String id){
+  public Mono<ResponseEntity<StudentDto>> ver(@PathVariable String id){
     return studentService.findById(id)
             .flatMap(student -> Mono.just(studentConverter.converToDto(student)))
             .map(student -> ResponseEntity
@@ -39,7 +39,7 @@ public class StudentController {
   }
 
   @PostMapping
-  public  Mono<ResponseEntity<StudentDTO>> registrar(@RequestBody StudentDTO student){
+  public  Mono<ResponseEntity<StudentDto>> registrar(@RequestBody StudentDto student){
     return studentService.create(studentConverter.convertToDocument(student))
             .flatMap(s -> Mono.just(studentConverter.converToDto(s)))
             .map(s -> ResponseEntity
@@ -47,7 +47,7 @@ public class StudentController {
   }
 
   @PutMapping("/{id}")
-  public Mono<ResponseEntity<StudentDTO>> actulizar(@RequestBody StudentDTO student, @PathVariable String id){
+  public Mono<ResponseEntity<StudentDto>> actulizar(@RequestBody StudentDto student, @PathVariable String id){
     return studentService.update(studentConverter.convertToDocument(student), id)
             .flatMap(s -> Mono.just(studentConverter.converToDto(s)))
             .map(s -> ResponseEntity

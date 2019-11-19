@@ -3,7 +3,7 @@ package com.microservice.student.model.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-abstract class PersonDTO implements Serializable {
+abstract class PersonDto implements Serializable {
   private String id;
   private String fullName;
   private String typeDocument;

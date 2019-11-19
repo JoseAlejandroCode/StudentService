@@ -1,8 +1,6 @@
 package com.microservice.student.model.dto;
 
-import java.util.Date;
-
-public class FamilyDTO extends PersonDTO {
+public class FamilyDto extends PersonDto {
 
   private String relationship;
 
