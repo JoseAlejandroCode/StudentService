@@ -1,34 +1,15 @@
-package com.microservice.student.model.document;
+package com.microservice.student.model.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import java.io.Serializable;
 import java.util.Date;
 
-@Document(collection = "family")
-public class Family {
-
-  @Id
+abstract class PersonDTO implements Serializable {
   private String id;
   private String fullName;
   private String typeDocument;
   private String numberDocument;
   private Boolean gender;
   private Date birthdate;
-  private String relationship;
-  private String idStudent;
-
-  public Family() {
-  }
-
-  public Family(String fullName, String typeDocument, String numberDocument, Boolean gender, Date birthdate, String relationship) {
-    this.fullName = fullName;
-    this.typeDocument = typeDocument;
-    this.numberDocument = numberDocument;
-    this.gender = gender;
-    this.birthdate = birthdate;
-    this.relationship = relationship;
-  }
 
   public String getId() {
     return id;
@@ -76,21 +57,5 @@ public class Family {
 
   public void setBirthdate(Date birthdate) {
     this.birthdate = birthdate;
-  }
-
-  public String getRelationship() {
-    return relationship;
-  }
-
-  public void setRelationship(String relationship) {
-    this.relationship = relationship;
-  }
-
-  public String getIdStudent() {
-    return idStudent;
-  }
-
-  public void setIdStudent(String idStudent) {
-    this.idStudent = idStudent;
   }
 }
