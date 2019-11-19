@@ -30,7 +30,19 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
-  public Mono<Void> delete(Student student) {
-    return studentDAO.delete(student);
+  public Mono<Student> update(Student student, String id) {
+    return findById(id).flatMap(s -> {
+      s.setFullName(student.getFullName());
+      s.setBirthdate(student.getBirthdate());
+      s.setGender(student.getGender());
+      s.setTypeDocument(student.getTypeDocument());
+      s.setNumberDocument(student.getNumberDocument());
+      return studentDAO.save(s);
+    });
+  }
+
+  @Override
+  public Mono<Void> delete(String  id) {
+    return findById(id).flatMap(s -> studentDAO.delete(s));
   }
 }
