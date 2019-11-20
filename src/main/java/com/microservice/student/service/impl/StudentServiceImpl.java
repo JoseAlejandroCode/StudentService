@@ -1,8 +1,10 @@
 package com.microservice.student.service.impl;
 
 import com.microservice.student.component.StudentConverter;
+import com.microservice.student.model.dto.StudentDto;
 import com.microservice.student.repository.StudentRepository;
 import com.microservice.student.model.document.Student;
+import com.microservice.student.service.FamilyService;
 import com.microservice.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,37 +18,45 @@ public class StudentServiceImpl implements StudentService {
   private StudentRepository studentRepository;
 
   @Autowired
+  private FamilyService familyService;
+
+  @Autowired
   private StudentConverter studentConverter;
 
   @Override
-  public Flux<Student> findAll() {
-    return studentRepository.findAll();
+  public Flux<StudentDto> findAll() {
+    return  studentRepository.findAll()
+            .flatMap(student -> Mono.just(studentConverter.convertToDto(student)));
   }
 
   @Override
-  public Mono<Student> findById(String id) {
-    return studentRepository.findById(id);
+  public Mono<StudentDto> findById(String id) {
+    return  studentRepository.findById(id)
+            .flatMap(student -> Mono.just(studentConverter.convertToDto(student)));
   }
 
   @Override
-  public Mono<Student> create(Student student) {
-    return studentRepository.save(student);
+  public Mono<StudentDto> create(StudentDto student) {
+    return studentRepository.save(studentConverter.convertToDocument(student))
+            .flatMap(s -> Mono.just(studentConverter.convertToDto(s)));
   }
 
   @Override
-  public Mono<Student> update(Student student, String id) {
+  public Mono<StudentDto> update(StudentDto student, String id) {
     return findById(id).flatMap(s -> {
       s.setFullName(student.getFullName());
       s.setBirthdate(student.getBirthdate());
       s.setGender(student.getGender());
       s.setTypeDocument(student.getTypeDocument());
       s.setNumberDocument(student.getNumberDocument());
-      return studentRepository.save(s);
+      return studentRepository.save(studentConverter.convertToDocument(s))
+              .flatMap(st -> Mono.just(studentConverter.convertToDto(st)));
     });
   }
 
   @Override
   public Mono<Void> delete(String  id) {
-    return findById(id).flatMap(s -> studentRepository.delete(s));
+    return findById(id)
+            .flatMap(s -> studentRepository.delete(studentConverter.convertToDocument(s)));
   }
 }

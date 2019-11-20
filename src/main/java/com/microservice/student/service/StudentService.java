@@ -1,13 +1,13 @@
 package com.microservice.student.service;
 
-import com.microservice.student.model.document.Student;
+import com.microservice.student.model.dto.StudentDto;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface StudentService {
-  Flux<Student> findAll();
-  Mono<Student> findById(String id);
-  Mono<Student> create(Student student);
-  Mono<Student> update(Student student, String id);
+  Flux<StudentDto> findAll();
+  Mono<StudentDto> findById(String id);
+  Mono<StudentDto> create(StudentDto student);
+  Mono<StudentDto> update(StudentDto student, String id);
   Mono<Void> delete(String id);
 }

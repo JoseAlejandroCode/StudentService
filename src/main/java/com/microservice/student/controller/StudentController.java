@@ -25,31 +25,28 @@ public class StudentController {
   @GetMapping
   public Mono<ResponseEntity<Flux<StudentDto>>> listar(){
     return Mono.just(ResponseEntity
-            .ok().contentType(MediaType.APPLICATION_JSON).body(studentService.findAll().flatMap(
-                    student -> Mono.just(studentConverter.convertToDto(student))
-            )));
+            .ok().contentType(MediaType.APPLICATION_JSON).body(studentService.findAll()));
   }
 
   @GetMapping("/{id}")
   public Mono<ResponseEntity<StudentDto>> ver(@PathVariable String id){
     return studentService.findById(id)
-            .flatMap(student -> Mono.just(studentConverter.convertToDto(student)))
             .map(student -> ResponseEntity
             .ok().contentType(MediaType.APPLICATION_JSON).body(student));
   }
 
   @PostMapping
   public  Mono<ResponseEntity<StudentDto>> registrar(@RequestBody StudentDto student){
-    return studentService.create(studentConverter.convertToDocument(student))
-            .flatMap(s -> Mono.just(studentConverter.convertToDto(s)))
+    return studentService.create(student)
+            .flatMap(s -> Mono.just(s))
             .map(s -> ResponseEntity
             .created(URI.create("/api/students")).contentType(MediaType.APPLICATION_JSON).body(s));
   }
 
   @PutMapping("/{id}")
   public Mono<ResponseEntity<StudentDto>> actulizar(@RequestBody StudentDto student, @PathVariable String id){
-    return studentService.update(studentConverter.convertToDocument(student), id)
-            .flatMap(s -> Mono.just(studentConverter.convertToDto(s)))
+    return studentService.update(student, id)
+            .flatMap(s -> Mono.just(s))
             .map(s -> ResponseEntity
                 .created(URI.create("/api/students")).contentType(MediaType.APPLICATION_JSON).body(s));
   }
