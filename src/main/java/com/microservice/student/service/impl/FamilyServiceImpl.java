@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -24,4 +25,13 @@ public class FamilyServiceImpl implements FamilyService {
             .retrieve()
             .bodyToMono(FamilyDto.class);
   }
+
+  @Override
+  public Flux<FamilyDto> findByStudent(String idStudent) {
+    return webClient.get()
+            .accept(MediaType.APPLICATION_JSON)
+            .retrieve()
+            .bodyToFlux(FamilyDto.class);
+  }
+
 }

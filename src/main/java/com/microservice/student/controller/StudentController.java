@@ -54,8 +54,7 @@ public class StudentController {
   @DeleteMapping("/{id}")
   public Mono<ResponseEntity<Void>> eliminar(@PathVariable String id){
     return studentService.delete(id)
-            .flatMap(p -> Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)))
-            .defaultIfEmpty(new ResponseEntity<Void>(HttpStatus.NOT_FOUND));
+            .flatMap(p -> Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
   }
 
 }

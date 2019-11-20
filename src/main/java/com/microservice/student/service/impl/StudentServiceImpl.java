@@ -32,13 +32,24 @@ public class StudentServiceImpl implements StudentService {
   @Override
   public Mono<StudentDto> findById(String id) {
     return  studentRepository.findById(id)
-            .flatMap(student -> Mono.just(studentConverter.convertToDto(student)));
+            .flatMap(student -> {
+              StudentDto studentDto = studentConverter.convertToDto(student);
+              studentDto.setFamilyList(familyService.findByStudent(student.getId()).collectList().block());
+              return Mono.just(studentDto);
+            });
   }
 
   @Override
   public Mono<StudentDto> create(StudentDto student) {
     return studentRepository.save(studentConverter.convertToDocument(student))
-            .flatMap(s -> Mono.just(studentConverter.convertToDto(s)));
+            .flatMap(s -> Mono.just(studentConverter.convertToDto(s)))
+            .flatMap(s -> {
+              student.getFamilyList().forEach(family -> {
+                family.setIdStudent(s.getId());
+                 s.addFamily(familyService.save(family).block());
+              });
+              return Mono.just(s);
+            });
   }
 
   @Override
