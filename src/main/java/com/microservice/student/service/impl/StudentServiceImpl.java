@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Date;
+
 @Service
 public class StudentServiceImpl implements StudentService {
 
@@ -82,5 +84,35 @@ public class StudentServiceImpl implements StudentService {
               .flatMap(s -> studentRepository.delete(studentConverter.convertToDocument(s))
                         .zipWith(familyService.deleteByStudent(s.getId()))
                         .then());
+  }
+
+  @Override
+  public Flux<StudentDto> findByFullNameLikeIgnoreCase(String fullName) {
+    return studentRepository.findByFullNameIgnoreCaseLike(fullName)
+            .flatMap(student -> {
+              StudentDto studentDto = studentConverter.convertToDto(student);
+              studentDto.setFamilyList(familyService.findByStudent(student.getId()).collectList().block());
+              return Mono.just(studentDto);
+            });
+  }
+
+  @Override
+  public Mono<StudentDto> findByNumberDocument(String numberDocument) {
+    return studentRepository.findByNumberDocument(numberDocument)
+            .flatMap(student -> {
+              StudentDto studentDto = studentConverter.convertToDto(student);
+              studentDto.setFamilyList(familyService.findByStudent(student.getId()).collectList().block());
+              return Mono.just(studentDto);
+            });
+  }
+
+  @Override
+  public Flux<StudentDto> findByBirthdate(Date dateStart, Date dateEnd) {
+    return studentRepository.findByBirthdateBetween(dateStart, dateEnd)
+            .flatMap(student -> {
+              StudentDto studentDto = studentConverter.convertToDto(student);
+              studentDto.setFamilyList(familyService.findByStudent(student.getId()).collectList().block());
+              return Mono.just(studentDto);
+            });
   }
 }

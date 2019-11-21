@@ -1,5 +1,5 @@
 package com.microservice.student.exception;
-
+/*
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -31,4 +31,4 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
     map.put("error", " System Error ");
     return map;
   }
-}
+}*/

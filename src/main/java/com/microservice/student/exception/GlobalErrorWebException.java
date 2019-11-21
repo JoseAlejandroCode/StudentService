@@ -1,5 +1,5 @@
 package com.microservice.student.exception;
-
+/*
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
@@ -41,3 +41,4 @@ public class GlobalErrorWebException extends AbstractErrorWebExceptionHandler {
   }
 
 }
+*/

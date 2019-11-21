@@ -13,6 +13,9 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/students")
@@ -58,4 +61,25 @@ public class StudentController {
             .flatMap(p -> Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
   }
 
+  @GetMapping("/name/{fullName}")
+  public Mono<ResponseEntity<Flux<StudentDto>>> findByFullName(@PathVariable String fullName){
+    return Mono.just(ResponseEntity
+            .ok().contentType(MediaType.APPLICATION_JSON)
+            .body(studentService.findByFullNameLikeIgnoreCase(fullName.toUpperCase())));
+  }
+
+  @GetMapping("/document/{numberDocument}")
+  public Mono<ResponseEntity<StudentDto>> findByNumberDocument(@PathVariable String numberDocument){
+    return studentService.findByNumberDocument(numberDocument)
+            .map(student -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(student));
+  }
+
+  @GetMapping("/birthdate/{dateStart}/{dateEnd}")
+  public Mono<ResponseEntity<Flux<StudentDto>>> findByBirthdate(@PathVariable String dateStart
+  , @PathVariable String dateEnd) throws ParseException {
+    return Mono.just(ResponseEntity
+            .ok().contentType(MediaType.APPLICATION_JSON)
+            .body(studentService.findByBirthdate(new SimpleDateFormat("yyyy-MM-dd").parse(dateStart),
+                    new SimpleDateFormat("yyyy-MM-dd").parse(dateEnd))));
+  }
 }
