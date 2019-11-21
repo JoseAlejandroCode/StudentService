@@ -1,14 +1,24 @@
 package com.microservice.student.model.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 abstract class PersonDto implements Serializable {
   private String id;
+  @NotEmpty
   private String fullName;
+  @NotEmpty
   private String typeDocument;
+  @NotEmpty
   private String numberDocument;
+  @NotNull
   private Boolean gender;
+  @NotNull
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdate;
 
   public String getId() {

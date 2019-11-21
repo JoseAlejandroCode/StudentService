@@ -2,7 +2,10 @@ package com.microservice.student.model.document;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,10 +14,16 @@ import java.util.List;
 public class Student {
   @Id
   private String id;
+  @NotEmpty
   private String fullName;
+  @NotEmpty
   private String typeDocument;
+  @NotEmpty
   private String numberDocument;
+  @NotNull
   private Boolean gender;
+  @NotNull
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdate;
 
   public Student() {

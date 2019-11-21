@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -36,7 +37,7 @@ public class StudentController {
   }
 
   @PostMapping
-  public  Mono<ResponseEntity<StudentDto>> save(@RequestBody StudentDto student){
+  public  Mono<ResponseEntity<StudentDto>> save(@Valid @RequestBody StudentDto student){
     return studentService.create(student)
             .flatMap(s -> Mono.just(s))
             .map(s -> ResponseEntity
