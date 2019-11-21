@@ -72,6 +72,11 @@ public class StudentServiceImpl implements StudentService {
   @Override
   public Mono<Void> delete(String  id) {
     return findById(id)
-            .flatMap(s -> studentRepository.delete(studentConverter.convertToDocument(s)));
+              .flatMap(s -> {
+                //familyService.deleteByStudent(s.getId());
+                return studentRepository.delete(studentConverter.convertToDocument(s))
+                        .zipWith(familyService.deleteByStudent(s.getId()))
+                        .then();
+    });
   }
 }

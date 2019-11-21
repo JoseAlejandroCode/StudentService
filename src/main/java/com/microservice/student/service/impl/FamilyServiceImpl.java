@@ -29,6 +29,14 @@ public class FamilyServiceImpl implements FamilyService {
   }
 
   @Override
+  public Mono<Void> deleteByStudent(String idStudent) {
+    return webClient.delete()
+            .uri("/student/{idStudent}", Collections.singletonMap("idStudent", idStudent))
+            .retrieve()
+            .bodyToMono(Void.class);
+  }
+
+  @Override
   public Flux<FamilyDto> findByStudent(String idStudent) {
     return webClient.get()
             .uri("/student/{idStudent}", Collections.singletonMap("idStudent", idStudent))
