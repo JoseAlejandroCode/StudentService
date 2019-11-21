@@ -25,13 +25,17 @@ public class StudentServiceImpl implements StudentService {
 
   @Override
   public Flux<StudentDto> findAll() {
-    return  studentRepository.findAll()
-            .flatMap(student -> Mono.just(studentConverter.convertToDto(student)));
+    return studentRepository.findAll()
+            .flatMap(student -> {
+              StudentDto studentDto = studentConverter.convertToDto(student);
+              studentDto.setFamilyList(familyService.findByStudent(student.getId()).collectList().block());
+              return Mono.just(studentDto);
+            });
   }
 
   @Override
   public Mono<StudentDto> findById(String id) {
-    return  studentRepository.findById(id)
+    return studentRepository.findById(id)
             .flatMap(student -> {
               StudentDto studentDto = studentConverter.convertToDto(student);
               studentDto.setFamilyList(familyService.findByStudent(student.getId()).collectList().block());

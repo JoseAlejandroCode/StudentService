@@ -10,6 +10,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Collections;
+
 @Service
 public class FamilyServiceImpl implements FamilyService {
 
@@ -29,6 +31,7 @@ public class FamilyServiceImpl implements FamilyService {
   @Override
   public Flux<FamilyDto> findByStudent(String idStudent) {
     return webClient.get()
+            .uri("/student/{idStudent}", Collections.singletonMap("idStudent", idStudent))
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .bodyToFlux(FamilyDto.class);

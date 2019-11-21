@@ -23,20 +23,20 @@ public class StudentController {
   private StudentConverter studentConverter;
 
   @GetMapping
-  public Mono<ResponseEntity<Flux<StudentDto>>> listar(){
+  public Mono<ResponseEntity<Flux<StudentDto>>> findAll(){
     return Mono.just(ResponseEntity
             .ok().contentType(MediaType.APPLICATION_JSON).body(studentService.findAll()));
   }
 
   @GetMapping("/{id}")
-  public Mono<ResponseEntity<StudentDto>> ver(@PathVariable String id){
+  public Mono<ResponseEntity<StudentDto>> finById(@PathVariable String id){
     return studentService.findById(id)
             .map(student -> ResponseEntity
             .ok().contentType(MediaType.APPLICATION_JSON).body(student));
   }
 
   @PostMapping
-  public  Mono<ResponseEntity<StudentDto>> registrar(@RequestBody StudentDto student){
+  public  Mono<ResponseEntity<StudentDto>> save(@RequestBody StudentDto student){
     return studentService.create(student)
             .flatMap(s -> Mono.just(s))
             .map(s -> ResponseEntity
@@ -44,7 +44,7 @@ public class StudentController {
   }
 
   @PutMapping("/{id}")
-  public Mono<ResponseEntity<StudentDto>> actulizar(@RequestBody StudentDto student, @PathVariable String id){
+  public Mono<ResponseEntity<StudentDto>> update(@RequestBody StudentDto student, @PathVariable String id){
     return studentService.update(student, id)
             .flatMap(s -> Mono.just(s))
             .map(s -> ResponseEntity
@@ -52,7 +52,7 @@ public class StudentController {
   }
 
   @DeleteMapping("/{id}")
-  public Mono<ResponseEntity<Void>> eliminar(@PathVariable String id){
+  public Mono<ResponseEntity<Void>> delete(@PathVariable String id){
     return studentService.delete(id)
             .flatMap(p -> Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
   }
