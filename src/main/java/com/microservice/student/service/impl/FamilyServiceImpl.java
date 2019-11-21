@@ -29,6 +29,17 @@ public class FamilyServiceImpl implements FamilyService {
   }
 
   @Override
+  public Mono<FamilyDto> update(FamilyDto familyDto, String id) {
+    return webClient.put()
+            .uri("/{id}", Collections.singletonMap("id", id))
+            .accept(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromValue(familyDto))
+            .retrieve()
+            .bodyToMono(FamilyDto.class);
+  }
+
+  @Override
   public Mono<Void> deleteByStudent(String idStudent) {
     return webClient.delete()
             .uri("/student/{idStudent}", Collections.singletonMap("idStudent", idStudent))

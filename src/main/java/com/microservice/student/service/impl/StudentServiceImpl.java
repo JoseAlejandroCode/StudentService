@@ -65,18 +65,22 @@ public class StudentServiceImpl implements StudentService {
       s.setTypeDocument(student.getTypeDocument());
       s.setNumberDocument(student.getNumberDocument());
       return studentRepository.save(studentConverter.convertToDocument(s))
-              .flatMap(st -> Mono.just(studentConverter.convertToDto(st)));
+              .flatMap(st -> Mono.just(studentConverter.convertToDto(st)))
+              .flatMap(st -> {
+                student.getFamilyList().forEach(family -> {
+                  family.setIdStudent(st.getId());
+                  st.addFamily(familyService.update(family, family.getId()).block());
+                });
+                return Mono.just(st);
+              });
     });
   }
 
   @Override
   public Mono<Void> delete(String  id) {
     return findById(id)
-              .flatMap(s -> {
-                //familyService.deleteByStudent(s.getId());
-                return studentRepository.delete(studentConverter.convertToDocument(s))
+              .flatMap(s -> studentRepository.delete(studentConverter.convertToDocument(s))
                         .zipWith(familyService.deleteByStudent(s.getId()))
-                        .then();
-    });
+                        .then());
   }
 }
