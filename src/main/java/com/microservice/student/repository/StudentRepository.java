@@ -3,9 +3,8 @@ package com.microservice.student.repository;
 import com.microservice.student.model.document.Student;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
 import java.util.Date;
+import reactor.core.publisher.Mono;
 
 public interface StudentRepository extends ReactiveMongoRepository<Student, String> {
    Flux<Student> findByFullNameIgnoreCaseLike(String fullName);

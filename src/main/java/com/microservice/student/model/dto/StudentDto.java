@@ -10,7 +10,7 @@ public class StudentDto extends PersonDto {
   @ApiModelProperty(value = "List family of student", required = false)
   private List<FamilyDto> familyList;
 
-  public StudentDto(){
+  public StudentDto() {
     super();
     familyList = new ArrayList<>();
   }

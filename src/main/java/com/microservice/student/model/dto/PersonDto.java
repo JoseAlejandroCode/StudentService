@@ -1,30 +1,33 @@
 package com.microservice.student.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.NotNull;
 
 abstract class PersonDto implements Serializable {
   private String id;
+
   @ApiModelProperty(value = "Fullname", required = true)
-  @NotEmpty
+  @NotEmpty(message = "Name is required field")
   private String fullName;
+
   @ApiModelProperty(value = "Type document", required = true)
-  @NotEmpty
+  @NotEmpty(message = "Type document is required field")
   private String typeDocument;
+
   @ApiModelProperty(value = "Number document", required = true)
-  @NotEmpty
+  @NotEmpty(message = "Number document is required field")
   private String numberDocument;
+
   @ApiModelProperty(value = "Gender", required = true)
-  @NotNull
+  @NotNull(message = "Gender is required field")
   private Boolean gender;
+
   @ApiModelProperty(value = "Birthdate", required = true)
-  @NotNull
+  @NotNull(message = "Birthdate is required field")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdate;
 

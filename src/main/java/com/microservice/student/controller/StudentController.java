@@ -47,9 +47,8 @@ public class StudentController {
 
   @ApiOperation(value = "Save a student", response = StudentDto.class)
   @PostMapping
-  public  Mono<ResponseEntity<StudentDto>> save(@Valid @RequestBody StudentDto student){
+  public  Mono<ResponseEntity<StudentDto>> save(@Valid @RequestBody StudentDto student) {
     return studentService.create(student)
-            .flatMap(s -> Mono.just(s))
             .map(s -> ResponseEntity
             .created(URI.create("/api/students")).contentType(MediaType.APPLICATION_JSON).body(s));
   }
@@ -58,21 +57,20 @@ public class StudentController {
   @PutMapping("/{id}")
   public Mono<ResponseEntity<StudentDto>> update(@RequestBody StudentDto student, @PathVariable String id){
     return studentService.update(student, id)
-            .flatMap(s -> Mono.just(s))
             .map(s -> ResponseEntity
                 .created(URI.create("/api/students")).contentType(MediaType.APPLICATION_JSON).body(s));
   }
 
   @ApiOperation(value = "Delete of available student", response = Mono.class)
   @DeleteMapping("/{id}")
-  public Mono<ResponseEntity<Void>> delete(@PathVariable String id){
+  public Mono<ResponseEntity<Void>> delete(@PathVariable String id) {
     return studentService.delete(id)
             .flatMap(p -> Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
   }
 
   @ApiOperation(value = "View a student by name", response = StudentDto.class)
   @GetMapping("/name/{fullName}")
-  public Mono<ResponseEntity<Flux<StudentDto>>> findByFullName(@PathVariable String fullName){
+  public Mono<ResponseEntity<Flux<StudentDto>>> findByFullName(@PathVariable String fullName) {
     return Mono.just(ResponseEntity
             .ok().contentType(MediaType.APPLICATION_JSON)
             .body(studentService.findByFullNameLikeIgnoreCase(fullName.toUpperCase())));
@@ -80,15 +78,15 @@ public class StudentController {
 
   @ApiOperation(value = "View a student by number document", response = StudentDto.class)
   @GetMapping("/document/{numberDocument}")
-  public Mono<ResponseEntity<StudentDto>> findByNumberDocument(@PathVariable String numberDocument){
+  public Mono<ResponseEntity<StudentDto>> findByNumberDocument(@PathVariable String numberDocument) {
     return studentService.findByNumberDocument(numberDocument)
             .map(student -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(student));
   }
 
   @ApiOperation(value = "View a student by birth date between two dates", response = StudentDto.class)
   @GetMapping("/birthdate/{dateStart}/{dateEnd}")
-  public Mono<ResponseEntity<Flux<StudentDto>>> findByBirthdate(@PathVariable String dateStart
-  , @PathVariable String dateEnd) throws ParseException {
+  public Mono<ResponseEntity<Flux<StudentDto>>> findByBirthdate(@PathVariable String dateStart,
+                                                                @PathVariable String dateEnd) throws ParseException {
     return Mono.just(ResponseEntity
             .ok().contentType(MediaType.APPLICATION_JSON)
             .body(studentService.findByBirthdate(new SimpleDateFormat("yyyy-MM-dd").parse(dateStart),

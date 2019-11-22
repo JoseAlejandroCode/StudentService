@@ -12,7 +12,7 @@ public class ServiceConfig {
   private String pathFamily;
 
   @Bean
-  public WebClient registrarWebClient(){
+  public WebClient registrarWebClient() {
     return WebClient.create(pathFamily);
   }
 

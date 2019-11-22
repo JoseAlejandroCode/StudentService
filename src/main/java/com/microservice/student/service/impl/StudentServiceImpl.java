@@ -3,7 +3,6 @@ package com.microservice.student.service.impl;
 import com.microservice.student.component.StudentConverter;
 import com.microservice.student.model.dto.StudentDto;
 import com.microservice.student.repository.StudentRepository;
-import com.microservice.student.model.document.Student;
 import com.microservice.student.service.FamilyService;
 import com.microservice.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -27,7 +27,7 @@ public class GlobalErrorWebException extends AbstractErrorWebExceptionHandler {
   }
 
   @Override
-  protected RouterFunction<ServerResponse> getRoutingFunction(final ErrorAttributes errorAttributes) {
+    protected RouterFunction<ServerResponse> getRoutingFunction(final ErrorAttributes errorAttributes) {
     return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse);
   }
 
