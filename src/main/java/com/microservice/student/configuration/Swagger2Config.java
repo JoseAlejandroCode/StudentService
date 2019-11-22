@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -25,7 +24,7 @@ public class Swagger2Config {
             .select()
             .apis(RequestHandlerSelectors
                     .basePackage("com.microservice.student.controller"))
-            .paths(PathSelectors.ant("/.*"))
+            .paths(PathSelectors.regex("/api/students.*"))
             .build()
             .genericModelSubstitutes(Mono.class, Flux.class, Optional.class)
             .apiInfo(apiEndPointsInfo());

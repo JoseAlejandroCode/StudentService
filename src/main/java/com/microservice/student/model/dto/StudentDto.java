@@ -1,10 +1,13 @@
 package com.microservice.student.model.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDto extends PersonDto {
 
+  @ApiModelProperty(value = "List family of student", required = false)
   private List<FamilyDto> familyList;
 
   public StudentDto(){
