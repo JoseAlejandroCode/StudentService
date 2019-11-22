@@ -11,19 +11,19 @@ import java.util.Date;
 
 abstract class PersonDto implements Serializable {
   private String id;
-  @ApiModelProperty(value = "Fullname of student", required = true)
+  @ApiModelProperty(value = "Fullname", required = true)
   @NotEmpty
   private String fullName;
-  @ApiModelProperty(value = "Type document of student", required = true)
+  @ApiModelProperty(value = "Type document", required = true)
   @NotEmpty
   private String typeDocument;
-  @ApiModelProperty(value = "Number document of student", required = true)
+  @ApiModelProperty(value = "Number document", required = true)
   @NotEmpty
   private String numberDocument;
-  @ApiModelProperty(value = "Gender of student", required = true)
+  @ApiModelProperty(value = "Gender", required = true)
   @NotNull
   private Boolean gender;
-  @ApiModelProperty(value = "Birthdate of student", required = true)
+  @ApiModelProperty(value = "Birthdate", required = true)
   @NotNull
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdate;
