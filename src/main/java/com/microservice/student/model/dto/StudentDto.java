@@ -10,6 +10,8 @@ public class StudentDto extends PersonDto {
   @ApiModelProperty(value = "List family of student", required = false)
   private List<FamilyDto> familyList;
 
+  private List<CourseDto> courseList;
+
   public StudentDto() {
     super();
     familyList = new ArrayList<>();
@@ -25,5 +27,17 @@ public class StudentDto extends PersonDto {
 
   public void addFamily(FamilyDto family) {
     this.familyList.add(family);
+  }
+
+  public List<CourseDto> getCourseList() {
+    return courseList;
+  }
+
+  public void setCourseList(List<CourseDto> courseList) {
+    this.courseList = courseList;
+  }
+
+  public void addCourse(CourseDto course) {
+    this.courseList.add(course);
   }
 }

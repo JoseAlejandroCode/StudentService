@@ -4,7 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Document(collection = "students")
@@ -23,7 +26,13 @@ public class Student {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdate;
 
+  private List<String> familyList;
+
+  private List<String> coursesList;
+
   public Student() {
+    coursesList = new ArrayList<>();
+    familyList = new ArrayList<>();
   }
 
   public Student(String fullName, String typeDocument, String numberDocument, Boolean gender, Date birthdate) {
@@ -80,6 +89,30 @@ public class Student {
 
   public void setBirthdate(Date birthdate) {
     this.birthdate = birthdate;
+  }
+
+  public List<String> getCoursesList() {
+    return coursesList;
+  }
+
+  public void setCoursesList(List<String> coursesList) {
+    this.coursesList = coursesList;
+  }
+
+  public void addCourse(String course) {
+    this.coursesList.add(course);
+  }
+
+  public List<String> getFamilyList() {
+    return familyList;
+  }
+
+  public void setFamilyList(List<String> familyList) {
+    this.familyList = familyList;
+  }
+
+  public void addFamily(String family) {
+    this.familyList.add(family);
   }
 
 }

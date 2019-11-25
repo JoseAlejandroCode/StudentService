@@ -27,6 +27,8 @@ public class StudentConverter {
     student.setNumberDocument(studentDTO.getNumberDocument());
     student.setGender(studentDTO.getGender());
     student.setBirthdate(studentDTO.getBirthdate());
+    studentDTO.getFamilyList().forEach(f -> student.addFamily(f.getId()));
+    studentDTO.getCourseList().forEach(c -> student.addCourse(c.getId()));
     return student;
   }
 
