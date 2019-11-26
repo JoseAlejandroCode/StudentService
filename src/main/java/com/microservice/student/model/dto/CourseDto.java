@@ -4,11 +4,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CourseDto {
+public class CourseDto implements Serializable {
   private String id;
   @NotEmpty
   private String name;

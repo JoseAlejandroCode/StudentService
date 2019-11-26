@@ -1,16 +1,19 @@
 package com.microservice.student.model.dto;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FamilyDto extends PersonDto {
 
-  @ApiModelProperty(value = "Relationship of family", required = true)
+  private List<StudentDto> partnerList;
   @NotEmpty
   private String relationship;
-  @ApiModelProperty(value = "Student id of family", required = false)
-  private String idStudent;
+
+  public FamilyDto() {
+    super();
+    partnerList = new ArrayList<>();
+  }
 
   public String getRelationship() {
     return relationship;
@@ -20,11 +23,15 @@ public class FamilyDto extends PersonDto {
     this.relationship = relationship;
   }
 
-  public String getIdStudent() {
-    return idStudent;
+  public List<StudentDto> getPartnerList() {
+    return partnerList;
   }
 
-  public void setIdStudent(String idStudent) {
-    this.idStudent = idStudent;
+  public void setPartnerList(List<StudentDto> partnerList) {
+    this.partnerList = partnerList;
+  }
+
+  public void addPartner(StudentDto partner) {
+    this.partnerList.add(partner);
   }
 }

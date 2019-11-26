@@ -15,6 +15,7 @@ public class StudentDto extends PersonDto {
   public StudentDto() {
     super();
     familyList = new ArrayList<>();
+    courseList = new ArrayList<>();
   }
 
   public void setFamilyList(List<FamilyDto> familyList) {
