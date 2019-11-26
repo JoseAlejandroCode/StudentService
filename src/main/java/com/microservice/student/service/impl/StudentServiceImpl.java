@@ -65,7 +65,8 @@ public class StudentServiceImpl implements StudentService {
       s.setGender(student.getGender());
       s.setTypeDocument(student.getTypeDocument());
       s.setNumberDocument(student.getNumberDocument());
-      s.setFamilyList(student.getFamilyList());
+      student.getFamilyList().forEach(family -> s.addFamily(family));
+      student.getCourseList().forEach(course -> s.addCourse(course));
       return studentRepository.save(studentConverter.convertToDocument(s))
               .flatMap(st -> Mono.just(studentConverter.convertToDto(st)))
               .flatMap(st -> {
