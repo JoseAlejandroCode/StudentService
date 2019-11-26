@@ -25,7 +25,7 @@ class StudentApplicationTests {
 	private WebTestClient testClient;
 
 	private StudentDto studentDto  = new StudentDto();
-
+/*
 	@Test
 	public void saveTest(){
 		studentDto.setFullName("Student Test");
@@ -88,5 +88,5 @@ class StudentApplicationTests {
 								Assertions.assertThat(student.getBirthdate()).isNotNull();
 							});
 	}
-
+*/
 }
