@@ -20,6 +20,7 @@ public class FamilyServiceImpl implements FamilyService {
   @Override
   public Mono<FamilyDto> save(FamilyDto familyDto) {
     return webClient.post()
+            .uri("/api/family")
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(familyDto))
@@ -30,7 +31,7 @@ public class FamilyServiceImpl implements FamilyService {
   @Override
   public Mono<FamilyDto> update(FamilyDto familyDto, String id) {
     return webClient.put()
-            .uri("/{id}", Collections.singletonMap("id", id))
+            .uri("/api/family/{id}", Collections.singletonMap("id", id))
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(familyDto))
@@ -41,7 +42,7 @@ public class FamilyServiceImpl implements FamilyService {
   @Override
   public Mono<Void> deleteByStudent(String idStudent) {
     return webClient.delete()
-            .uri("/partner/{idPartner}", Collections.singletonMap("idPartner", idStudent))
+            .uri("/api/family/partner/{idPartner}", Collections.singletonMap("idPartner", idStudent))
             .retrieve()
             .bodyToMono(Void.class);
   }
@@ -49,7 +50,7 @@ public class FamilyServiceImpl implements FamilyService {
   @Override
   public Flux<FamilyDto> findByStudent(String idStudent) {
     return webClient.get()
-            .uri("/partner/{idPartner}", Collections.singletonMap("idPartner", idStudent))
+            .uri("/api/family/partner/{idPartner}", Collections.singletonMap("idPartner", idStudent))
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .bodyToFlux(FamilyDto.class);

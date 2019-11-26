@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-public class FamilyServiceConfig {
+public class ServiceConfig {
 
-  @Value("${config.base.family.uri}")
+  @Value("${config.base.service.uri}")
   private String pathFamily;
 
   @Bean
