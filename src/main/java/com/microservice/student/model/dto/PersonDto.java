@@ -1,11 +1,12 @@
 package com.microservice.student.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import org.springframework.format.annotation.DateTimeFormat;
-import javax.validation.constraints.NotNull;
 
 abstract class PersonDto implements Serializable {
   private String id;
@@ -31,6 +32,15 @@ abstract class PersonDto implements Serializable {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdate;
 
+  private InstituteDto institute;
+
+  public InstituteDto getInstitute() {
+    return institute;
+  }
+
+  public void setInstitute(InstituteDto institute) {
+    this.institute = institute;
+  }
   public String getId() {
     return id;
   }

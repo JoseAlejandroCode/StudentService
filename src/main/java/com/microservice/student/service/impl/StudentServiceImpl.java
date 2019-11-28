@@ -116,4 +116,10 @@ public class StudentServiceImpl implements StudentService {
               return Mono.just(studentDto);
             });
   }
+
+  @Override
+  public Flux<StudentDto> findByIdInstitute(String idInstitute) {
+    return studentRepository.findByIdInstitute(idInstitute)
+            .flatMap(student -> Mono.just(studentConverter.convertToDto(student)));
+  }
 }

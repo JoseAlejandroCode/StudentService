@@ -4,12 +4,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CourseDto implements Serializable {
+public class CourseDto {
   private String id;
   @NotEmpty
   private String name;
@@ -25,9 +24,19 @@ public class CourseDto implements Serializable {
   @NotNull
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date endCourse;
-  private List<StudentDto> studentList;
+  private List<PersonDto> studentList;
   private PersonDto teacher;
   private List<FamilyDto> familyList;
+
+  private InstituteDto institute;
+
+  public InstituteDto getInstitute() {
+    return institute;
+  }
+
+  public void setInstitute(InstituteDto institute) {
+    this.institute = institute;
+  }
 
   public CourseDto() {
     this.studentList = new ArrayList<>();
@@ -90,15 +99,15 @@ public class CourseDto implements Serializable {
     this.endCourse = endCourse;
   }
 
-  public List<StudentDto> getStudentList() {
+  public List<PersonDto> getStudentList() {
     return studentList;
   }
 
-  public void setStudentList(List<StudentDto> studentList) {
+  public void setStudentList(List<PersonDto> studentList) {
     this.studentList = studentList;
   }
 
-  public void addStudent(StudentDto student) {
+  public void addStudent(PersonDto student) {
     this.studentList.add(student);
   }
 

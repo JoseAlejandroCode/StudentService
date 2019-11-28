@@ -30,17 +30,28 @@ public class Student {
 
   private List<String> coursesList;
 
+  private String idInstitute;
+
+  public String getIdInstitute() {
+    return idInstitute;
+  }
+
+  public void setIdInstitute(String idInstitute) {
+    this.idInstitute = idInstitute;
+  }
+
   public Student() {
     coursesList = new ArrayList<>();
     familyList = new ArrayList<>();
   }
 
-  public Student(String fullName, String typeDocument, String numberDocument, Boolean gender, Date birthdate) {
+  public Student(String fullName, String typeDocument, String numberDocument, Boolean gender, Date birthdate, String idInstitute) {
     this.fullName = fullName;
     this.typeDocument = typeDocument;
     this.numberDocument = numberDocument;
     this.gender = gender;
     this.birthdate = birthdate;
+    this.idInstitute = idInstitute;
   }
 
   public String getId() {
@@ -114,5 +125,4 @@ public class Student {
   public void addFamily(String family) {
     this.familyList.add(family);
   }
-
 }

@@ -92,4 +92,11 @@ public class StudentController {
             .body(studentService.findByBirthdate(new SimpleDateFormat("yyyy-MM-dd").parse(dateStart),
                     new SimpleDateFormat("yyyy-MM-dd").parse(dateEnd))));
   }
+
+  @GetMapping("/institute/{idInstitute}")
+  public Mono<ResponseEntity<Flux<StudentDto>>> findByIdInstitute(@PathVariable String idInstitute){
+    return Mono.just(ResponseEntity
+            .ok().contentType(MediaType.APPLICATION_JSON)
+            .body(studentService.findByIdInstitute(idInstitute)));
+  }
 }

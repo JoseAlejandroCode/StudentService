@@ -7,6 +7,7 @@ import java.util.Date;
 import reactor.core.publisher.Mono;
 
 public interface StudentRepository extends ReactiveMongoRepository<Student, String> {
+   Flux<Student> findByIdInstitute(String idInstitute);
    Flux<Student> findByFullNameIgnoreCaseLike(String fullName);
    Mono<Student> findByNumberDocument(String numberDocument);
    Flux<Student> findByBirthdateBetween(Date dateStart, Date dateEnd);
